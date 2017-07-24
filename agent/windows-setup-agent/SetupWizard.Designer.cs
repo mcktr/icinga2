@@ -39,6 +39,7 @@
             this.prgConfig = new System.Windows.Forms.ProgressBar();
             this.tabParameters = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkDisableConfd = new System.Windows.Forms.CheckBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.chkRunServiceAsThisUser = new System.Windows.Forms.CheckBox();
             this.chkInstallNSCP = new System.Windows.Forms.CheckBox();
@@ -98,7 +99,7 @@
             // btnBack
             // 
             this.btnBack.Enabled = false;
-            this.btnBack.Location = new System.Drawing.Point(367, 592);
+            this.btnBack.Location = new System.Drawing.Point(370, 626);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 1;
@@ -108,7 +109,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(448, 592);
+            this.btnNext.Location = new System.Drawing.Point(451, 626);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 2;
@@ -119,7 +120,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(538, 592);
+            this.btnCancel.Location = new System.Drawing.Point(532, 626);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -133,7 +134,7 @@
             this.tabFinish.Location = new System.Drawing.Point(4, 5);
             this.tabFinish.Name = "tabFinish";
             this.tabFinish.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFinish.Size = new System.Drawing.Size(617, 500);
+            this.tabFinish.Size = new System.Drawing.Size(617, 534);
             this.tabFinish.TabIndex = 5;
             this.tabFinish.Text = "Finish";
             this.tabFinish.UseVisualStyleBackColor = true;
@@ -154,7 +155,7 @@
             this.tabConfigure.Location = new System.Drawing.Point(4, 5);
             this.tabConfigure.Name = "tabConfigure";
             this.tabConfigure.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConfigure.Size = new System.Drawing.Size(617, 500);
+            this.tabConfigure.Size = new System.Drawing.Size(617, 534);
             this.tabConfigure.TabIndex = 4;
             this.tabConfigure.Text = "Configure Icinga 2";
             this.tabConfigure.UseVisualStyleBackColor = true;
@@ -187,13 +188,14 @@
             this.tabParameters.Location = new System.Drawing.Point(4, 5);
             this.tabParameters.Name = "tabParameters";
             this.tabParameters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParameters.Size = new System.Drawing.Size(617, 500);
+            this.tabParameters.Size = new System.Drawing.Size(617, 534);
             this.tabParameters.TabIndex = 3;
             this.tabParameters.Text = "Agent Parameters";
             this.tabParameters.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkDisableConfd);
             this.groupBox3.Controls.Add(this.txtUser);
             this.groupBox3.Controls.Add(this.chkRunServiceAsThisUser);
             this.groupBox3.Controls.Add(this.chkInstallNSCP);
@@ -201,24 +203,35 @@
             this.groupBox3.Controls.Add(this.chkAcceptCommands);
             this.groupBox3.Location = new System.Drawing.Point(308, 359);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(301, 135);
+            this.groupBox3.Size = new System.Drawing.Size(301, 169);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Advanced Options";
             // 
+            // chkDisableConfd
+            // 
+            this.chkDisableConfd.AutoSize = true;
+            this.chkDisableConfd.Location = new System.Drawing.Point(6, 65);
+            this.chkDisableConfd.Name = "chkDisableConfd";
+            this.chkDisableConfd.Size = new System.Drawing.Size(193, 17);
+            this.chkDisableConfd.TabIndex = 9;
+            this.chkDisableConfd.Text = "Disable inclusion of conf.d directory";
+            this.chkDisableConfd.UseVisualStyleBackColor = true;
+            this.chkDisableConfd.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // txtUser
             // 
             this.txtUser.Enabled = false;
-            this.txtUser.Location = new System.Drawing.Point(28, 111);
+            this.txtUser.Location = new System.Drawing.Point(6, 134);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(267, 20);
+            this.txtUser.Size = new System.Drawing.Size(289, 20);
             this.txtUser.TabIndex = 8;
             this.txtUser.Text = "NT AUTHORITY\\NetworkService";
             // 
             // chkRunServiceAsThisUser
             // 
             this.chkRunServiceAsThisUser.AutoSize = true;
-            this.chkRunServiceAsThisUser.Location = new System.Drawing.Point(9, 88);
+            this.chkRunServiceAsThisUser.Location = new System.Drawing.Point(6, 111);
             this.chkRunServiceAsThisUser.Name = "chkRunServiceAsThisUser";
             this.chkRunServiceAsThisUser.Size = new System.Drawing.Size(142, 17);
             this.chkRunServiceAsThisUser.TabIndex = 7;
@@ -229,7 +242,7 @@
             // chkInstallNSCP
             // 
             this.chkInstallNSCP.AutoSize = true;
-            this.chkInstallNSCP.Location = new System.Drawing.Point(9, 65);
+            this.chkInstallNSCP.Location = new System.Drawing.Point(6, 88);
             this.chkInstallNSCP.Name = "chkInstallNSCP";
             this.chkInstallNSCP.Size = new System.Drawing.Size(149, 17);
             this.chkInstallNSCP.TabIndex = 6;
@@ -239,7 +252,7 @@
             // chkAcceptConfig
             // 
             this.chkAcceptConfig.AutoSize = true;
-            this.chkAcceptConfig.Location = new System.Drawing.Point(9, 42);
+            this.chkAcceptConfig.Location = new System.Drawing.Point(6, 42);
             this.chkAcceptConfig.Name = "chkAcceptConfig";
             this.chkAcceptConfig.Size = new System.Drawing.Size(190, 17);
             this.chkAcceptConfig.TabIndex = 1;
@@ -249,7 +262,7 @@
             // chkAcceptCommands
             // 
             this.chkAcceptCommands.AutoSize = true;
-            this.chkAcceptCommands.Location = new System.Drawing.Point(9, 19);
+            this.chkAcceptCommands.Location = new System.Drawing.Point(6, 19);
             this.chkAcceptCommands.Name = "chkAcceptCommands";
             this.chkAcceptCommands.Size = new System.Drawing.Size(171, 17);
             this.chkAcceptCommands.TabIndex = 0;
@@ -296,7 +309,7 @@
             this.groupBox2.Controls.Add(this.rdoListener);
             this.groupBox2.Location = new System.Drawing.Point(8, 359);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(294, 135);
+            this.groupBox2.Size = new System.Drawing.Size(294, 169);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "TCP Listener";
@@ -448,7 +461,7 @@
             this.tbcPages.Margin = new System.Windows.Forms.Padding(0);
             this.tbcPages.Name = "tbcPages";
             this.tbcPages.SelectedIndex = 0;
-            this.tbcPages.Size = new System.Drawing.Size(625, 509);
+            this.tbcPages.Size = new System.Drawing.Size(625, 543);
             this.tbcPages.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbcPages.TabIndex = 0;
             this.tbcPages.SelectedIndexChanged += new System.EventHandler(this.tbcPages_SelectedIndexChanged);
@@ -460,7 +473,7 @@
             this.tabRetrieveCertificate.Location = new System.Drawing.Point(4, 5);
             this.tabRetrieveCertificate.Name = "tabRetrieveCertificate";
             this.tabRetrieveCertificate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRetrieveCertificate.Size = new System.Drawing.Size(617, 500);
+            this.tabRetrieveCertificate.Size = new System.Drawing.Size(617, 534);
             this.tabRetrieveCertificate.TabIndex = 7;
             this.tabRetrieveCertificate.Text = "Checking Certificate";
             this.tabRetrieveCertificate.UseVisualStyleBackColor = true;
@@ -492,7 +505,7 @@
             this.tabVerifyCertificate.Location = new System.Drawing.Point(4, 5);
             this.tabVerifyCertificate.Name = "tabVerifyCertificate";
             this.tabVerifyCertificate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVerifyCertificate.Size = new System.Drawing.Size(617, 500);
+            this.tabVerifyCertificate.Size = new System.Drawing.Size(617, 534);
             this.tabVerifyCertificate.TabIndex = 6;
             this.tabVerifyCertificate.Text = "Verify Certificate";
             this.tabVerifyCertificate.UseVisualStyleBackColor = true;
@@ -592,7 +605,7 @@
             this.tabError.Location = new System.Drawing.Point(4, 5);
             this.tabError.Name = "tabError";
             this.tabError.Padding = new System.Windows.Forms.Padding(3);
-            this.tabError.Size = new System.Drawing.Size(617, 500);
+            this.tabError.Size = new System.Drawing.Size(617, 534);
             this.tabError.TabIndex = 8;
             this.tabError.Text = "Error";
             this.tabError.UseVisualStyleBackColor = true;
@@ -632,7 +645,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(625, 624);
+            this.ClientSize = new System.Drawing.Size(625, 661);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnBack);
@@ -723,6 +736,7 @@
 		private System.Windows.Forms.CheckBox chkInstallNSCP;
 		private System.Windows.Forms.TextBox txtUser;
 		private System.Windows.Forms.CheckBox chkRunServiceAsThisUser;
-	}
+        private System.Windows.Forms.CheckBox chkDisableConfd;
+    }
 }
 

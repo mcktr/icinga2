@@ -263,6 +263,16 @@ namespace Icinga
 				return;
 			}
 
+            if (chkDisableConfd.Checked) {
+                SetConfigureStatus(80, "Disable the inclusion of the conf.d directory");
+
+                String configurationFilePath = Program.Icinga2DataDir + String.Format("\\etc\\icinga2\\icinga2.conf");
+                String configFileText = File.ReadAllText(configurationFilePath);
+
+                configFileText.Replace("include_recursive \"conf.d\"", "// include_recursive \"conf.d\"");
+                File.WriteAllText(configurationFilePath, configFileText);
+            } 
+
 			if (chkInstallNSCP.Checked) {
 				SetConfigureStatus(85, "Waiting for NSClient++ installation to complete...");
 
@@ -503,5 +513,10 @@ namespace Icinga
 			if (!txtUser.Enabled)
 				txtUser.Text = Icinga2User;
 		}
-	}
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
