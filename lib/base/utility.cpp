@@ -1524,7 +1524,9 @@ static bool ReleaseHelper(String *platformName, String *platformVersion)
 		if (IsWindows8OrGreater())
 			*platformVersion = "8";
 		if (IsWindows8Point1OrGreater())
-			*platformVersion = "8.1 or greater";
+			*platformVersion = "8.1";
+		if (IsWindows10OrGreater())
+			*platformVersion = "10 or greater";
 		if (IsWindowsServer())
 			*platformVersion += " (Server)";
 	}
