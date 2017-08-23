@@ -16,7 +16,7 @@
 # Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 if(MSVC)
-  set(WindowsSources icinga.rc)
+  set(WindowsSources icinga.rc icinga.manifest)
 else()
   set(WindowsSources "")
 endif()
