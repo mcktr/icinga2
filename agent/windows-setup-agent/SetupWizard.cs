@@ -509,7 +509,8 @@ namespace Icinga
         {
             ListViewItem lvi = lvwEndpoints.SelectedItems[0];
             EndpointInputBox eib = new EndpointInputBox();
-      
+
+            eib.Text = "Edit Endpoint";
             eib.txtInstanceName.Text = lvi.SubItems[0].Text;
 
             if (lvi.SubItems.Count >= 2) {
