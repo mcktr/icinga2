@@ -178,7 +178,7 @@ void TcpSocket::Connect(const String& node, const String& service)
 		}
 
 		const int optTrue = 1;
-		if (setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, reinterpret_cast<const char *>(&optTrue), sizeof(optTrue)) != 0) {
+		if (rc = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, reinterpret_cast<const char *>(&optTrue), sizeof(optTrue)) != 0) {
 #ifdef _WIN32
 			error = WSAGetLastError();
 #else /* _WIN32 */
@@ -186,6 +186,17 @@ void TcpSocket::Connect(const String& node, const String& service)
 #endif /* _WIN32 */
 			Log(LogWarning, "TcpSocket")
 			    << "setsockopt() unable to enable TCP keep-alives with error code " << rc;
+		}
+
+		const int optTimeout = 15;
+		if (rc = setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char *>(&optTimeout), sizeof(optTimeout)) < 0) {
+#ifdef _WIN32
+			error = WSAGetLastError();
+#else /* _WIN32 */
+			error = errno;
+#endif /* _WIN32 */
+			Log(LogWarning, "TcpSocket")
+			    << "setsockopt() unable to set TCP send timeout with error code " << rc;
 		}
 
 		rc = connect(fd, info->ai_addr, info->ai_addrlen);
