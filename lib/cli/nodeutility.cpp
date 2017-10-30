@@ -47,7 +47,7 @@ using namespace icinga;
  * Node Setup helpers
  */
 
-int NodeUtility::GenerateNodeIcingaConfig(const std::vector<std::string>& endpoints)
+int NodeUtility::GenerateNodeIcingaConfig(const std::vector<std::string>& endpoints, const std::vector<String>& globalzones)
 {
 	Array::Ptr my_config = new Array();
 
@@ -111,6 +111,17 @@ int NodeUtility::GenerateNodeIcingaConfig(const std::vector<std::string>& endpoi
 
 	my_zone->Set("endpoints", my_zone_members);
 
+	for (const String& globalzone : globalzones) {
+
+		Dictionary::Ptr my_global_zone = new Dictionary();
+
+		my_global_zone->Set("__name", globalzone);
+		my_global_zone->Set("__type", "Zone");
+		my_global_zone->Set("global", true);
+
+		my_config->Add(my_global_zone);
+    }
+	
 	/* store the local config */
 	my_config->Add(my_endpoint);
 	my_config->Add(my_zone);
@@ -123,14 +134,15 @@ int NodeUtility::GenerateNodeIcingaConfig(const std::vector<std::string>& endpoi
 	return 0;
 }
 
-int NodeUtility::GenerateNodeMasterIcingaConfig(void)
+int NodeUtility::GenerateNodeMasterIcingaConfig(const std::vector<String>& globalzones)
 {
 	Array::Ptr my_config = new Array();
 
 	/* store the local generated node master configuration */
 	Dictionary::Ptr my_master_endpoint = new Dictionary();
 	Dictionary::Ptr my_master_zone = new Dictionary();
-	Array::Ptr my_master_zone_members = new Array();
+    
+    Array::Ptr my_master_zone_members = new Array();
 
 	my_master_endpoint->Set("__name", new ConfigIdentifier("NodeName"));
 	my_master_endpoint->Set("__type", "Endpoint");
@@ -143,7 +155,18 @@ int NodeUtility::GenerateNodeMasterIcingaConfig(void)
 
 	/* store the local config */
 	my_config->Add(my_master_endpoint);
-	my_config->Add(my_master_zone);
+	my_config->Add(my_master_zone);    
+
+	for (const String& globalzone : globalzones) {
+
+		Dictionary::Ptr my_global_zone = new Dictionary();
+
+		my_global_zone->Set("__name", globalzone);
+		my_global_zone->Set("__type", "Zone");
+		my_global_zone->Set("global", true);
+
+		my_config->Add(my_global_zone);
+    }
 
 	/* write the newly generated configuration */
 	String zones_path = Application::GetSysconfDir() + "/icinga2/zones.conf";

@@ -498,7 +498,12 @@ wizard_ticket:
 	/* apilistener config */
 	Log(LogInformation, "cli", "Generating local zones.conf.");
 
-	NodeUtility::GenerateNodeIcingaConfig(endpoints);
+	std::vector<String> globalzones;
+	
+	globalzones.push_back("global-templates"); 
+	globalzones.push_back("director-global");
+	
+	NodeUtility::GenerateNodeIcingaConfig(endpoints, globalzones);
 
 	if (cn != Utility::GetFQDN()) {
 		Log(LogWarning, "cli")
@@ -594,7 +599,12 @@ int NodeWizardCommand::MasterSetup(void) const
 	else
 		std::cout << "'api' feature already enabled.\n";
 
-	NodeUtility::GenerateNodeMasterIcingaConfig();
+	std::vector<String> globalzones;
+	
+	globalzones.push_back("global-templates"); 
+	globalzones.push_back("director-global");
+
+	NodeUtility::GenerateNodeMasterIcingaConfig(globalzones);
 
 	/* apilistener config */
 	std::cout << ConsoleColorTag(Console_Bold)
@@ -668,6 +678,6 @@ int NodeWizardCommand::MasterSetup(void) const
 	String salt = RandomString(16);
 
 	NodeUtility::UpdateConstant("TicketSalt", salt);
-
+    
 	return 0;
 }

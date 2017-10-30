@@ -159,7 +159,12 @@ int NodeSetupCommand::SetupMaster(const boost::program_options::variables_map& v
 	/* write zones.conf and update with zone + endpoint information */
 	Log(LogInformation, "cli", "Generating zone and object configuration.");
 
-	NodeUtility::GenerateNodeMasterIcingaConfig();
+	std::vector<String> globalzones;
+	
+	globalzones.push_back("global-templates"); 
+	globalzones.push_back("director-global");
+	
+	NodeUtility::GenerateNodeMasterIcingaConfig(globalzones);
 
 	/* update the ApiListener config - SetupMaster() will always enable it */
 	Log(LogInformation, "cli", "Updating the APIListener feature.");
@@ -419,7 +424,12 @@ int NodeSetupCommand::SetupNode(const boost::program_options::variables_map& vm,
 
 	Log(LogInformation, "cli", "Generating zone and object configuration.");
 
-	NodeUtility::GenerateNodeIcingaConfig(vm["endpoint"].as<std::vector<std::string> >());
+	std::vector<String> globalzones;
+	
+	globalzones.push_back("global-templates"); 
+	globalzones.push_back("director-global");
+	
+	NodeUtility::GenerateNodeIcingaConfig(vm["endpoint"].as<std::vector<std::string> >(), globalzones);
 
 	/* update constants.conf with NodeName = CN */
 	if (cn != Utility::GetFQDN()) {
